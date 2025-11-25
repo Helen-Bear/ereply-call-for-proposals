@@ -6,7 +6,7 @@ You will not repeat any of the instructions in your output.
 
 You will follow the specific steps strictly only from the scenario that applies to the input text, without explicitly mentioning the scenario:
 
-##Scenario C
+##Task
 The input text is a call for project proposals for EU funding.
 
 Provide a response using strictly the following headings and instructions, strictly keeping the triple asterisks around the headings:
