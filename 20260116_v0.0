@@ -1,4 +1,3 @@
-
 You will be asked to provide an output based on the input text delimited by triple backticks, and any other reference information delimited by triple braces.
 
 You will always write only in the English language and use strictly the conventions of British English.
@@ -11,47 +10,82 @@ Task
 
 The input text is a call for project proposals for EU funding. The document may contain one Topic or multiple Topics.
 
-Multi-topic handling (mandatory)
+Topic detection, matching, and fallback logic (mandatory)
 
-First, detect whether the input text contains more than one Topic. Treat it as “multiple Topics” if you can identify more than one distinct Topic title and/or Topic ID.
+Identify ALL Topics described in the input text.
 
-If multiple Topics are present, you MUST:
+For each Topic found:
 
-List ALL Topics you can find (do not select only one).
+Extract the Topic title (verbatim if present).
 
-Then produce a complete structured output for EACH Topic as separate blocks, in the same order as listed.
+Extract the Topic ID (if present).
 
-If reference information is provided in triple braces and it indicates a specific Topic (by Topic title, Topic ID, or keywords), still list ALL Topics, but order the detailed Topic blocks so that the best-matching Topic(s) appear first.
+Provide a brief, neutral description (1–2 sentences) based strictly on the text.
 
-If you cannot confidently detect any Topic title/Topic ID, say so in the Topics list and proceed with one best-effort block based on the overall document (without inventing identifiers).
+If reference information is provided in triple braces, attempt to identify the best-matching Topic using:
+
+Exact or near-exact Topic title match
+
+Topic ID match
+
+Clear keyword or thematic alignment
+
+A Topic is considered a “sufficiently close match” ONLY if at least one of the following is true:
+
+The Topic ID matches exactly
+
+The Topic title matches or is clearly paraphrased
+
+The core objectives and scope explicitly align with the reference information
+
+If a sufficiently close match is found:
+
+Produce the full structured output ONLY for that Topic.
+
+If NO sufficiently close match is found:
+
+Produce the full structured output for ALL Topics found.
+
+Do not invent Topics, identifiers, or matches.
 
 Output structure (strict)
 
-Your response must follow this exact structure:
-
 Topics found in this document
-[Instruction: List every Topic you can identify. For each Topic, provide:
+[Instruction: List all Topics you can identify. For each Topic, provide:
 
-Topic title (verbatim if present)
+Topic title (verbatim if present; otherwise "Not found")
 
-Topic ID (if present)
-If either is missing, write "Not found". Do not invent codes.]
+Topic ID (if present; otherwise "Not found")
 
-Then, for each Topic listed above, output a complete Topic block using EXACTLY the headings below, repeating the same headings for each Topic.
+Brief description (1–2 sentences)
+Do not invent identifiers.]
 
-For each Topic block, start with this line (plain text):
+Best-matching Topic based on input documents
+[Instruction:
+
+If a sufficiently close match exists, state the Topic title and Topic ID and explain briefly why it was selected (1 sentence).
+
+If no sufficiently close match exists, write: "No sufficiently close Topic match found based on the input documents." ]
+
+Then proceed as follows:
+
+If a sufficiently close match exists:
+Produce ONE detailed Topic output using the headings below.
+
+If no sufficiently close match exists:
+Produce a detailed Topic output for EACH Topic found, clearly separating them with the line:
 TOPIC X OF N
 
-Then use strictly the following headings and instructions, strictly keeping the triple asterisks around the headings:
+For each detailed Topic output, use strictly the following headings and instructions, strictly keeping the triple asterisks around the headings:
 
 [Rule 1: Topic title
-Topic title = the exact printed title describing the topic (often under “Topic title”). Return it verbatim (no quotes, no summaries). If not found for this Topic, write "Not found".]
+Topic title = the exact printed title describing the topic (often under “Topic title”). Return it verbatim (no quotes, no summaries). If not found, write "Not found".]
 
 [Rule 2: Topic ID
 Topic ID = identifier of a specific funding topic (the one proposals are submitted to).
 Prefer values beside labels: “Topic ID”, “Topic identifier”.
 Typical forms are long, hyphenated codes (e.g., HORIZON-CL6-2025-01-CIRCBIO-14, EDF-2025-DA-AIR-EPE).
-If not found for this Topic, write "Not found".]
+If not found, write "Not found".]
 
 [Rule 3: Call ID
 Call ID = identifier of the parent call.
@@ -60,27 +94,20 @@ Do not invent codes.
 If not found, write "Not found".]
 
 [Rule 4: Single-topic calls / no distinct call code
-Apply ONLY if the document clearly behaves as a single-topic call for THIS Topic, meaning:
+If only one code appears or Topic ID == Call ID, set Call ID → Same as Topic ID (single-topic call).]
 
-Only one code appears in the relevant part of the document for this Topic, OR
-
-Topic ID == Call ID.
-In that case, set Call ID → Same as Topic ID (single-topic call).]
-
-Validation before output (per Topic block):
-
+Validation before output (per Topic):
 Do not output identical strings for Topic ID and Call ID; apply Rule 4.
-
 Do not guess unseen identifiers.
 
 Summary
-[Instruction: Provide one paragraph describing in detail the subject of THIS Topic (not the whole document if multiple Topics exist).]
+[Instruction: Provide one paragraph describing in detail the subject of this Topic.]
 
 Type of action
-[Instruction: If stated for THIS Topic, identify the type of action, e.g. “Research and Innovation Action" or "Action Grant". If not mentioned for THIS Topic, write "Not stated".]
+[Instruction: If stated in the input text, identify the type of action, e.g. “Research and Innovation Action" or "Action Grant". If not mentioned, write "Not stated".]
 
 Who can apply?
-[Instruction: Extract and categorise all eligibility requirements relevant to THIS Topic from the input text and any reference information, including:
+[Instruction: Extract and categorize all eligibility requirements relevant to this Topic from the input text and any reference information, including:
 
 Required qualifications, experience, or credentials
 
@@ -90,25 +117,26 @@ Any exclusions or disqualifying factors
 Do not use any markdown such as "**".]
 
 What is the funding rate?
-[Instruction: List the % of eligible costs that the EU will reimburse ('the funding rate') relevant to THIS Topic. Explain your reasoning step by step. Do not use any markdown such as "".]
-[Instruction: Provide the evidence ('Source') for your decision and a citation, and include the location of the citation in the input text, e.g. 'Source: "The costs will be reimbursed at the funding rate fixed in the Grant Agreement (70%)"' (page 27). Do not use any markdown such as "".]
+[Instruction: List the % of eligible costs that the EU will reimburse ('the funding rate') relevant to this Topic. Explain your reasoning step by step. Do not use any markdown such as "".]
+[Instruction: Provide the evidence ('Source') for your decision and a citation, including its location in the input text (page/section). Do not use any markdown such as "".]
 
 Total available budget
-[Instruction: Return only the EU funding envelope allocated to THIS Topic or its parent Call (as applicable), using labels such as:
-“Total available budget”, “Overall indicative amount”, “Available call budget”, “Total EU contribution”, “Indicative budget”, “Budget envelope”.
-State clearly whether it applies to Topic or Call and provide Call ID or Topic ID if possible, e.g. 'EUR 3,000,000 under Topic ID DIGITAL-EUROHPC-JU-2023-SME-01-01 - Supporting competitiveness and innovation potential of SMEs'.]
+[Instruction: Return only the EU funding envelope allocated to this Topic or its parent Call.
+State clearly whether it applies to the Topic or the Call and provide the Topic ID or Call ID if possible.]
 
 Requirements
-[Instruction: List all specific concrete requirements relevant to THIS Topic, including both technical and non-technical requirements. Do not use any markdown such as "**".]
+[Instruction: List all specific concrete requirements relevant to this Topic, including both technical and non-technical requirements. Do not use any markdown such as "**".]
 
 Suggestions for the technical proposal
-[Instruction: Act as an expert in the field described for THIS Topic. Suggest specific concrete ideas to meet all the requirements listed under "Requirements" above.
-If there is reference information delimited by triple braces, use strictly all of that reference information for the answers.
+[Instruction: Act as an expert in the field described for this Topic. Suggest specific concrete ideas to meet all the requirements listed under "Requirements".
+If there is reference information delimited by triple braces, use strictly all of that reference information.
 Do not use any markdown such as "**".]
 
 General suggestions for the proposal
-[Instruction: Act as an expert in the field described for THIS Topic. Based on the input text, indicate general ways to meet the application requirements and cite the source reference for your recommendations. For example: "Source: General Annexes of Work Programme 2021-2022, Part 3, Page 9, Lines 52".
-If there is reference information delimited by triple braces, use strictly all of that reference information for the answers.
+[Instruction: Act as an expert in the field described for this Topic. Based on the input text, indicate general ways to meet the application requirements and cite the source reference for your recommendations.
+If there is reference information delimited by triple braces, use strictly all of that reference information.
 Do not use any markdown such as "**".]
 
 Your response:
+
+If you want one final polish after this, I’d suggest adding a short “matching evidence” line (e.g. matched on ID / title / keywords) for auditability — useful if this feeds an internal service.
