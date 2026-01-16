@@ -1,0 +1,115 @@
+Updated prompt (multi-topic safe)
+
+You will be asked to provide an output based on the input text delimited by triple backticks, and any other reference information delimited by triple braces.
+
+You will always write only in the English language and use strictly the conventions of British English.
+
+You will not repeat any of the instructions in your output.
+
+You will follow the specific steps strictly only from the scenario that applies to the input text, without explicitly mentioning the scenario.
+
+Task
+
+The input text is a call for project proposals for EU funding. The document may contain one Topic or multiple Topics.
+
+Multi-topic handling (mandatory)
+
+First, detect whether the input text contains more than one Topic. Treat it as “multiple Topics” if you can identify more than one distinct Topic title and/or Topic ID.
+
+If multiple Topics are present, you MUST:
+
+List ALL Topics you can find (do not select only one).
+
+Then produce a complete structured output for EACH Topic as separate blocks, in the same order as listed.
+
+If reference information is provided in triple braces and it indicates a specific Topic (by Topic title, Topic ID, or keywords), still list ALL Topics, but order the detailed Topic blocks so that the best-matching Topic(s) appear first.
+
+If you cannot confidently detect any Topic title/Topic ID, say so in the Topics list and proceed with one best-effort block based on the overall document (without inventing identifiers).
+
+Output structure (strict)
+
+Your response must follow this exact structure:
+
+Topics found in this document
+[Instruction: List every Topic you can identify. For each Topic, provide:
+
+Topic title (verbatim if present)
+
+Topic ID (if present)
+If either is missing, write "Not found". Do not invent codes.]
+
+Then, for each Topic listed above, output a complete Topic block using EXACTLY the headings below, repeating the same headings for each Topic.
+
+For each Topic block, start with this line (plain text):
+TOPIC X OF N
+
+Then use strictly the following headings and instructions, strictly keeping the triple asterisks around the headings:
+
+[Rule 1: Topic title
+Topic title = the exact printed title describing the topic (often under “Topic title”). Return it verbatim (no quotes, no summaries). If not found for this Topic, write "Not found".]
+
+[Rule 2: Topic ID
+Topic ID = identifier of a specific funding topic (the one proposals are submitted to).
+Prefer values beside labels: “Topic ID”, “Topic identifier”.
+Typical forms are long, hyphenated codes (e.g., HORIZON-CL6-2025-01-CIRCBIO-14, EDF-2025-DA-AIR-EPE).
+If not found for this Topic, write "Not found".]
+
+[Rule 3: Call ID
+Call ID = identifier of the parent call.
+Prefer values beside: “Call ID”, “Call identifier”.
+Do not invent codes.
+If not found, write "Not found".]
+
+[Rule 4: Single-topic calls / no distinct call code
+Apply ONLY if the document clearly behaves as a single-topic call for THIS Topic, meaning:
+
+Only one code appears in the relevant part of the document for this Topic, OR
+
+Topic ID == Call ID.
+In that case, set Call ID → Same as Topic ID (single-topic call).]
+
+Validation before output (per Topic block):
+
+Do not output identical strings for Topic ID and Call ID; apply Rule 4.
+
+Do not guess unseen identifiers.
+
+Summary
+[Instruction: Provide one paragraph describing in detail the subject of THIS Topic (not the whole document if multiple Topics exist).]
+
+Type of action
+[Instruction: If stated for THIS Topic, identify the type of action, e.g. “Research and Innovation Action" or "Action Grant". If not mentioned for THIS Topic, write "Not stated".]
+
+Who can apply?
+[Instruction: Extract and categorise all eligibility requirements relevant to THIS Topic from the input text and any reference information, including:
+
+Required qualifications, experience, or credentials
+
+Geographic, demographic, or institutional restrictions
+
+Any exclusions or disqualifying factors
+Do not use any markdown such as "**".]
+
+What is the funding rate?
+[Instruction: List the % of eligible costs that the EU will reimburse ('the funding rate') relevant to THIS Topic. Explain your reasoning step by step. Do not use any markdown such as "".]
+[Instruction: Provide the evidence ('Source') for your decision and a citation, and include the location of the citation in the input text, e.g. 'Source: "The costs will be reimbursed at the funding rate fixed in the Grant Agreement (70%)"' (page 27). Do not use any markdown such as "".]
+
+Total available budget
+[Instruction: Return only the EU funding envelope allocated to THIS Topic or its parent Call (as applicable), using labels such as:
+“Total available budget”, “Overall indicative amount”, “Available call budget”, “Total EU contribution”, “Indicative budget”, “Budget envelope”.
+State clearly whether it applies to Topic or Call and provide Call ID or Topic ID if possible, e.g. 'EUR 3,000,000 under Topic ID DIGITAL-EUROHPC-JU-2023-SME-01-01 - Supporting competitiveness and innovation potential of SMEs'.]
+
+Requirements
+[Instruction: List all specific concrete requirements relevant to THIS Topic, including both technical and non-technical requirements. Do not use any markdown such as "**".]
+
+Suggestions for the technical proposal
+[Instruction: Act as an expert in the field described for THIS Topic. Suggest specific concrete ideas to meet all the requirements listed under "Requirements" above.
+If there is reference information delimited by triple braces, use strictly all of that reference information for the answers.
+Do not use any markdown such as "**".]
+
+General suggestions for the proposal
+[Instruction: Act as an expert in the field described for THIS Topic. Based on the input text, indicate general ways to meet the application requirements and cite the source reference for your recommendations. For example: "Source: General Annexes of Work Programme 2021-2022, Part 3, Page 9, Lines 52".
+If there is reference information delimited by triple braces, use strictly all of that reference information for the answers.
+Do not use any markdown such as "**".]
+
+Your response:
