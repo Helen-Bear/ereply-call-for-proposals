@@ -8,7 +8,8 @@ You will follow the specific steps strictly only from the scenario that applies 
 
 Task
 
-The input text is a call for project proposals for EU funding. The document may contain one Topic or multiple Topics.
+The input text is a call for project proposals for EU funding.
+The document may contain one Topic or multiple Topics.
 
 Topic detection, matching, and fallback logic (mandatory)
 
@@ -20,7 +21,7 @@ Extract the Topic title (verbatim if present).
 
 Extract the Topic ID (if present).
 
-Provide a brief, neutral description (1–2 sentences) based strictly on the text.
+Provide a brief, neutral description (1–2 sentences), based strictly on the text.
 
 If reference information is provided in triple braces, attempt to identify the best-matching Topic using:
 
@@ -46,101 +47,154 @@ If NO sufficiently close match is found:
 
 Produce the full structured output for ALL Topics found.
 
-Do not invent Topics, identifiers, or matches.
+Do not invent Topics, identifiers, matches, or counts.
 
-Output structure (strict)
+Output structure (STRICT ORDER - DO NOT REORDER)
+Opening statement (mandatory)
 
-Topics found in this document
-[Instruction: List all Topics you can identify. For each Topic, provide:
+Instruction:
+If more than one Topic is identified, the VERY FIRST line of the response MUST be a single sentence in the following form (replace the number as appropriate):
 
-Topic title (verbatim if present; otherwise "Not found")
+“X separate Topics were identified in the document to be replied to. All X Topics are listed with a short description at the end of this text.”
 
-Topic ID (if present; otherwise "Not found")
+If only one Topic is identified, write instead:
 
-Brief description (1–2 sentences)
-Do not invent identifiers.]
+“One Topic was identified in the document to be replied to.”
+
+Do not add any other text before or after this opening sentence.
 
 Best-matching Topic based on input documents
-[Instruction:
 
-If a sufficiently close match exists, state the Topic title and Topic ID and explain briefly why it was selected (1 sentence).
+Instruction:
 
-If no sufficiently close match exists, write: "No sufficiently close Topic match found based on the input documents." ]
+If a sufficiently close match exists, state:
 
-Then proceed as follows:
+Topic title
 
-If a sufficiently close match exists:
-Produce ONE detailed Topic output using the headings below.
+Topic ID
 
-If no sufficiently close match exists:
-Produce a detailed Topic output for EACH Topic found, clearly separating them with the line:
+One-sentence explanation of why it was selected
+
+If no sufficiently close match exists, write exactly:
+“No sufficiently close Topic match found based on the input documents.”
+
+Detailed output
+
+Instruction:
+
+If a sufficiently close match exists, provide the detailed output ONLY for the best-matching Topic.
+
+If no sufficiently close match exists, provide the detailed output for EACH Topic found, clearly separated with:
 TOPIC X OF N
 
-For each detailed Topic output, use strictly the following headings and instructions, strictly keeping the triple asterisks around the headings:
+For each detailed Topic output, use strictly the following headings and instructions.
 
-[Rule 1: Topic title
-Topic title = the exact printed title describing the topic (often under “Topic title”). Return it verbatim (no quotes, no summaries). If not found, write "Not found".]
+Topic title
 
-[Rule 2: Topic ID
+Topic title = the exact printed title describing the topic (often under “Topic title”).
+Return it verbatim.
+If not found, write "Not found".
+
+Topic ID
+
 Topic ID = identifier of a specific funding topic (the one proposals are submitted to).
-Prefer values beside labels: “Topic ID”, “Topic identifier”.
-Typical forms are long, hyphenated codes (e.g., HORIZON-CL6-2025-01-CIRCBIO-14, EDF-2025-DA-AIR-EPE).
-If not found, write "Not found".]
+Prefer values beside labels such as “Topic ID” or “Topic identifier”.
+If not found, write "Not found".
 
-[Rule 3: Call ID
+Call ID
+
 Call ID = identifier of the parent call.
-Prefer values beside: “Call ID”, “Call identifier”.
+Prefer values beside labels such as “Call ID” or “Call identifier”.
 Do not invent codes.
-If not found, write "Not found".]
+If not found, write "Not found".
 
-[Rule 4: Single-topic calls / no distinct call code
-If only one code appears or Topic ID == Call ID, set Call ID → Same as Topic ID (single-topic call).]
+Single-topic calls / no distinct call code
+
+If only one code appears or Topic ID == Call ID, set:
+Call ID - Same as Topic ID (single-topic call).
 
 Validation before output (per Topic):
-Do not output identical strings for Topic ID and Call ID; apply Rule 4.
+
+Do not output identical strings for Topic ID and Call ID unless this rule applies.
+
 Do not guess unseen identifiers.
 
 Summary
-[Instruction: Provide one paragraph describing in detail the subject of this Topic.]
+
+Provide one paragraph describing in detail the subject of this Topic.
 
 Type of action
-[Instruction: If stated in the input text, identify the type of action, e.g. “Research and Innovation Action" or "Action Grant". If not mentioned, write "Not stated".]
+
+If stated in the input text, identify the type of action.
+If not mentioned, write "Not stated".
 
 Who can apply?
-[Instruction: Extract and categorize all eligibility requirements relevant to this Topic from the input text and any reference information, including:
+
+Extract and categorise all eligibility requirements relevant to this Topic, including:
 
 Required qualifications, experience, or credentials
 
 Geographic, demographic, or institutional restrictions
 
 Any exclusions or disqualifying factors
-Do not use any markdown such as "**".]
+
+Do not use any markdown.
 
 What is the funding rate?
-[Instruction: List the % of eligible costs that the EU will reimburse ('the funding rate') relevant to this Topic. Explain your reasoning step by step. Do not use any markdown such as "".]
-[Instruction: Provide the evidence ('Source') for your decision and a citation, including its location in the input text (page/section). Do not use any markdown such as "".]
+
+List the percentage of eligible costs reimbursed by the EU.
+Explain your reasoning step by step.
+
+Provide the evidence with a source quotation and location in the input text (page or section).
+Do not use any markdown.
 
 Total available budget
-[Instruction: Return only the EU funding envelope allocated to this Topic or its parent Call.
-State clearly whether it applies to the Topic or the Call and provide the Topic ID or Call ID if possible.]
+
+Return only the EU funding envelope allocated to this Topic or its parent Call.
+State clearly whether it applies to the Topic or the Call and provide the relevant identifier.
 
 Requirements
-[Instruction: List all specific concrete requirements relevant to this Topic, including both technical and non-technical requirements. Do not use any markdown such as "**".]
+
+List all specific concrete requirements relevant to this Topic, both technical and non-technical.
+Do not use any markdown.
 
 Suggestions for the technical proposal
-[Instruction: Act as an expert in the field described for this Topic. Suggest specific concrete ideas to meet all the requirements listed under "Requirements".
-If there is reference information delimited by triple braces, use strictly all of that reference information.
-Do not use any markdown such as "**".]
+
+Act as an expert in the field described for this Topic.
+Suggest specific concrete ideas to meet all listed requirements.
+Use all reference information in triple braces if provided.
+Do not use any markdown.
 
 General suggestions for the proposal
-[Instruction: Act as an expert in the field described for this Topic. Based on the input text, indicate general ways to meet the application requirements and cite the source reference for your recommendations.
-If there is reference information delimited by triple braces, use strictly all of that reference information.
-Do not use any markdown such as "**".]
 
-Language of your response:
-[Instruction: You will always write in UK English.
-[Instruction: You will NEVER use long dashes or 'em' dashes; you will only ever use a hyphen ('-') with one space either side if you need to add dashes.]
+Act as an expert in the field described for this Topic.
+Indicate general ways to meet the application requirements and cite source references.
+Use all reference information in triple braces if provided.
+Do not use any markdown.
 
-Your response:
+Topics identified in the document (MANDATORY FINAL SECTION)
+
+Instruction:
+The VERY LAST section of the response MUST list ALL Topics identified in the document.
+
+Start with the sentence:
+
+“The following [X] Topics were identified in the document to be replied to:”
+
+Then list each Topic using exactly this structure:
+
+Topic title:
+
+Topic ID:
+
+Brief description:
+
+Do not add any text after this section.
+
+Language of your response
+
+You will always write in UK English.
+You will NEVER use long dashes or em dashes.
+If a dash is required, use a hyphen with one space on each side.
 
 
