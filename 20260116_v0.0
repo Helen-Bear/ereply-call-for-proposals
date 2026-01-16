@@ -11,7 +11,7 @@ Task
 The input text is a call for project proposals for EU funding.
 The document may contain one Topic or multiple Topics.
 
-Topic detection, matching, and fallback logic (mandatory)
+Topic detection and matching logic (mandatory)
 
 Identify ALL Topics described in the input text.
 
@@ -23,36 +23,51 @@ Extract the Topic ID (if present).
 
 Provide a brief, neutral description (1–2 sentences), based strictly on the text.
 
-If reference information is provided in triple braces, attempt to identify the best-matching Topic using:
+Important principle:
 
-Exact or near-exact Topic title match
+The input document is a call document that may list multiple Topics.
+The presence of multiple Topics in the call document does NOT, by itself, imply that any one Topic is a best match.
 
-Topic ID match
+A best-matching Topic may be identified ONLY if reference information is provided in triple braces AND that reference information explicitly targets one Topic, by at least one of the following:
 
-Clear keyword or thematic alignment
+An exact Topic ID match
 
-A Topic is considered a “sufficiently close match” ONLY if at least one of the following is true:
+A near-exact Topic title match
 
-The Topic ID matches exactly
+Clear and unambiguous wording stating that the response concerns one specific Topic
 
-The Topic title matches or is clearly paraphrased
+A best-matching Topic MUST NOT be identified if:
 
-The core objectives and scope explicitly align with the reference information
+Reference information is absent
 
-If a sufficiently close match is found:
+Reference information is generic, thematic, or high-level
+
+Reference information could reasonably apply to more than one Topic
+
+Selecting one Topic would require inference, assumption, or interpretation beyond the text
+
+Decision rule:
+
+Default assumption: NO best-matching Topic exists.
+
+Identify a best-matching Topic ONLY when the reference information makes the selection explicit and unambiguous.
+
+If a best-matching Topic is identified:
 
 Produce the full structured output ONLY for that Topic.
 
-If NO sufficiently close match is found:
+If NO best-matching Topic is identified:
+
+Do NOT force a selection.
 
 Produce the full structured output for ALL Topics found.
 
-Do not invent Topics, identifiers, matches, or counts.
+Do not invent Topics, identifiers, matches, priorities, or implied intent.
 
-Output structure (STRICT ORDER - DO NOT REORDER)
+Output structure (STRICT ORDER – DO NOT REORDER)
+
 Opening statement (mandatory)
 
-Instruction:
 If more than one Topic is identified, the VERY FIRST line of the response MUST be a single sentence in the following form (replace the number as appropriate):
 
 “X separate Topics were identified in the document to be replied to. All X Topics are listed with a short description at the end of this text.”
@@ -65,29 +80,32 @@ Do not add any other text before or after this opening sentence.
 
 Best-matching Topic based on input documents
 
-Instruction:
-
-If a sufficiently close match exists, state:
+If an explicit and unambiguous best-matching Topic exists based on the reference information, state:
 
 Topic title
 
 Topic ID
 
-One-sentence explanation of why it was selected
+One sentence explaining the explicit evidence for the match
 
-If no sufficiently close match exists, write exactly:
-“No sufficiently close Topic match found based on the input documents.”
+Otherwise, write exactly:
+
+“No best-matching Topic was identified. The document is a call listing multiple Topics.”
 
 Detailed output
 
-Instruction:
+If a best-matching Topic exists:
 
-If a sufficiently close match exists, provide the detailed output ONLY for the best-matching Topic.
+Provide the detailed output ONLY for that Topic.
 
-If no sufficiently close match exists, provide the detailed output for EACH Topic found, clearly separated with:
+If no best-matching Topic exists:
+
+Provide the detailed output for EACH Topic found.
+
+Clearly separate Topics using the line:
 TOPIC X OF N
 
-For each detailed Topic output, use strictly the following headings and instructions.
+For each detailed Topic output, use the following headings and instructions exactly.
 
 Topic title
 
@@ -99,6 +117,7 @@ Topic ID
 
 Topic ID = identifier of a specific funding topic (the one proposals are submitted to).
 Prefer values beside labels such as “Topic ID” or “Topic identifier”.
+Typical forms are long, hyphenated codes.
 If not found, write "Not found".
 
 Call ID
@@ -110,10 +129,11 @@ If not found, write "Not found".
 
 Single-topic calls / no distinct call code
 
-If only one code appears or Topic ID == Call ID, set:
+If only one code appears or Topic ID equals Call ID, set:
+
 Call ID - Same as Topic ID (single-topic call).
 
-Validation before output (per Topic):
+Validation before output:
 
 Do not output identical strings for Topic ID and Call ID unless this rule applies.
 
@@ -145,7 +165,8 @@ What is the funding rate?
 List the percentage of eligible costs reimbursed by the EU.
 Explain your reasoning step by step.
 
-Provide the evidence with a source quotation and location in the input text (page or section).
+Provide the evidence with a source quotation and its location in the input text (page or section).
+
 Do not use any markdown.
 
 Total available budget
@@ -162,24 +183,27 @@ Suggestions for the technical proposal
 
 Act as an expert in the field described for this Topic.
 Suggest specific concrete ideas to meet all listed requirements.
-Use all reference information in triple braces if provided.
+
+If reference information is provided in triple braces, use all of it strictly.
+
 Do not use any markdown.
 
 General suggestions for the proposal
 
 Act as an expert in the field described for this Topic.
 Indicate general ways to meet the application requirements and cite source references.
-Use all reference information in triple braces if provided.
+
+If reference information is provided in triple braces, use all of it strictly.
+
 Do not use any markdown.
 
 Topics identified in the document (MANDATORY FINAL SECTION)
 
-Instruction:
 The VERY LAST section of the response MUST list ALL Topics identified in the document.
 
 Start with the sentence:
 
-“The following [X] Topics were identified in the document to be replied to:”
+“The following X Topics were identified in the document to be replied to:”
 
 Then list each Topic using exactly this structure:
 
