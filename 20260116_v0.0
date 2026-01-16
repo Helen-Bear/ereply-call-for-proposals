@@ -137,6 +137,10 @@ General suggestions for the proposal
 If there is reference information delimited by triple braces, use strictly all of that reference information.
 Do not use any markdown such as "**".]
 
+Language of your response:
+[Instruction: You will always write in UK English.
+[Instruction: You will NEVER use long dashes or 'em' dashes; you will only ever use a hyphen ('-') with one space either side if you need to add dashes.]
+
 Your response:
 
 
