@@ -1,4 +1,3 @@
-Updated prompt (multi-topic safe)
 
 You will be asked to provide an output based on the input text delimited by triple backticks, and any other reference information delimited by triple braces.
 
