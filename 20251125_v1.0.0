@@ -11,6 +11,10 @@ The input text is a call for project proposals for EU funding.
 
 Provide a response using strictly the following headings and instructions, strictly keeping the triple asterisks around the headings:
 
+[Rule 1: ***Purpose of this document***
+You must include the following text verbatim:
+"This document aims to help applicants understand the call for proposals (topic) by providing a concise summary of the call, the key elements of a proposal to be submitted and giving some suggestions to prepare a proposal. The document could be useful for potential applicants less familiarised with the programme. The purpose is to help users to better understand the call for proposals, but it does not replace the call documents which remain the only legally binding source of information."
+
 [Rule 1: ***Topic title***
 Topic title = the exact printed title describing the topic (often under “Topic title”). Return it verbatim (no quotes, no summaries).]
 
