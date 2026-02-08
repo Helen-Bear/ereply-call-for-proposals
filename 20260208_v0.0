@@ -53,7 +53,7 @@ Do not guess unseen identifiers.
 [Instruction: Return only the EU funding envelope allocated to the Topic or Call (a.k.a. “Total available budget”, “Overall indicative amount”, “Available call budget”, “Total EU contribution”, “Indicative budget”, “Budget envelope”). 
 [Rule: Write if funding envelope applies to Topic or Call and provide Call ID or Topic ID if possible, e.g. 'EUR 3,000,000 under Topic ID DIGITAL-EUROHPC-JU-2023-SME-01-01 - Supporting competitiveness and innovation potential of SMEs']
 
-***Requirements***
+***Key elements for the proposal***
 [Instruction: List all specific concrete requirements in the input text, including both technical and non-technical requirements. Do not use any markdown such as "**".]
 
 ***Suggestions for drafting a proposal specific to this topic***
