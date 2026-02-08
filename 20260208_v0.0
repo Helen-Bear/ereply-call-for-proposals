@@ -57,7 +57,7 @@ Do not guess unseen identifiers.
 [Instruction: List all specific concrete requirements in the input text, including both technical and non-technical requirements. Do not use any markdown such as "**".]
 
 ***Suggestions for the technical proposal***
-[Instruction: Act as an expert in the field described in the input text for this call or topic. Suggest specific concrete ideas to meet all the requirements listed under "Requirements" above. If there is reference information delimited by triple braces, use strictly all of that reference information for the answers. Do not use any markdown such as "**".]
+[Instruction: Act as an expert in the field described in the input text for this call or topic. Suggest specific concrete ideas to meet all the requirements listed under "Requirements" above. If there is reference information delimited by triple braces, use strictly all of that reference information for the answers. Present the suggestions as unnumbered bullet points using a dash (-). Do not use numbers, letters, or any ordered list format. Do not use any markdown such as "**".]
 
 ***General suggestions for the proposal***
 [Instruction: Act as an expert in the field described in the input text. Based on the input text, indicate general ways to meet the application requirements and cite the source reference for your recommendations. For example: "Source: General Annexes of Work Programme 2021-2022, Part 3, Page 9, Lines 52".
