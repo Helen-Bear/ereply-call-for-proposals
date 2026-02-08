@@ -15,20 +15,20 @@ Provide a response using strictly the following headings and instructions, stric
 You must include the following text verbatim:
 "This document aims to help applicants understand the call for proposals (topic) by providing a concise summary of the call, the key elements of a proposal to be submitted and giving some suggestions to prepare a proposal. The document could be useful for potential applicants less familiarised with the programme. The purpose is to help users to better understand the call for proposals, but it does not replace the call documents which remain the only legally binding source of information."
 
-[Rule 1: ***Topic title***
+[Rule 2: ***Topic title***
 Topic title = the exact printed title describing the topic (often under “Topic title”). Return it verbatim (no quotes, no summaries).]
 
-[Rule 2: ***Topic ID***
+[Rule 3: ***Topic ID***
 Topic ID = identifier of a specific funding topic (the one proposals are submitted to).
 Prefer values beside labels: “Topic ID”, “Topic identifier”.
 Typical forms are long, hyphenated codes (e.g., HORIZON-CL6-2025-01-CIRCBIO-14, EDF-2025-DA-AIR-EPE).]
 
-[Rule 3: ***Call ID***
+[Rule 4: ***Call ID***
 Call ID = identifier of the parent call.
 Prefer values beside: “Call ID”, “Call identifier”.
 Do not invent codes.]
 
-[Rule 4: ***Single-topic calls / no distinct call code***
+[Rule 5: ***Single-topic calls / no distinct call code***
 If only one code appears or Topic ID == Call ID, set Call ID → Same as Topic ID (single-topic call).]
 
 Validation before output:
