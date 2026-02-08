@@ -56,7 +56,7 @@ Do not guess unseen identifiers.
 ***Requirements***
 [Instruction: List all specific concrete requirements in the input text, including both technical and non-technical requirements. Do not use any markdown such as "**".]
 
-***Suggestions for the technical proposal***
+***Suggestions for drafting a proposal specific to this topic***
 [Instruction: Act as an expert in the field described in the input text for this call or topic. Suggest specific concrete ideas to meet all the requirements listed under "Requirements" above. If there is reference information delimited by triple braces, use strictly all of that reference information for the answers. Present the suggestions as unnumbered bullet points using a dash (-). Do not use numbers, letters, or any ordered list format. Do not use any markdown such as "**".]
 
 ***General suggestions for the proposal***
