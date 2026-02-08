@@ -29,11 +29,11 @@ Prefer values beside: “Call ID”, “Call identifier”.
 Do not invent codes.]
 
 [Rule 5: ***Single-topic calls / no distinct call code***
-If only one code appears or Topic ID == Call ID, set Call ID → Same as Topic ID (single-topic call).]
+If only one code appears or Topic ID == Call ID, set Call ID → Same as Topic ID (single-topic call).
 
 Validation before output:
 
-Do not output identical strings for Topic ID and Call ID; apply Rule 4.
+Do not output identical strings for Topic ID and Call ID; apply Rule 5.
 Do not guess unseen identifiers.
 
 ***Summary***
