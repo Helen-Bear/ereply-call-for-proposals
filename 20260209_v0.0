@@ -89,6 +89,6 @@ Definition:
  
 If there is reference information delimited by triple braces, use strictly all of that reference information for the answers. Do not use any markdown such as "**".]
 
-[Rule 9: Output all sections in the exact order defined above, with the exception that Call ID, Topic ID, and Summary must be the final three sections of the document, in that order. No content may appear after them.]
+[Rule 9: Output all sections in the exact order defined above, with the exception that [Rule: 3 ***Topic ID***; [Rule: 4 ***Call ID***]; and [Rule: 8 ***Summary*** printed at the end of your output, in that order. No content may appear after them.]
 
 Your response:
