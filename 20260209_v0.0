@@ -70,7 +70,7 @@ Definition:
   - "Total EU contribution"
 - Do not use per-project contributions or estimated contributions per project.
  Return the extracted budget amount and currency.
-- On a new line, return the exact source sentence or line from which it was extracted.
+- On a new line, return the exact source sentence or line and title of document from which it was extracted.
 - If no such sentence exists, return:
   Budget: Not stated
   Source: Not found
