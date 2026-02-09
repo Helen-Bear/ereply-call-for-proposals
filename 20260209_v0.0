@@ -29,7 +29,7 @@ Prefer values beside: “Call ID”, “Call identifier”.
 Do not invent codes.]
 
 [Rule 5: ***Single-topic calls / no distinct call code***
-If only one code appears or Topic ID == Call ID, set Call ID → Same as Topic ID (single-topic call).
+If only one code appears or Topic ID == Call ID, set Call ID → Same as Topic ID (single-topic call).]
 
 [Rule 6: 
 
@@ -37,10 +37,17 @@ Do not output identical strings for Topic ID and Call ID; apply Rule 5.
 Do not guess unseen identifiers.]
 
 [Rule 7: ***Work programme***
-Provide programme name, e.g. for "Work Programme ERC 2025", print: "Horizon Europe, Work Programme Horizon ERC 2025"
+[Instruction: Provide programme name, e.g. for "Work Programme ERC 2025", print: "Horizon Europe, Work Programme Horizon ERC 2025"]
 
-***Summary***
+[Rule 8: ***Summary***
 [Instruction: Provide one paragraph describing in detail the subject of the input text.]
+[Instruction: Print the countries/participants who are eligible for funding, e.g.:
+"To be eligible for funding, applicants must be established in one of the eligible countries, i.e.:
+- the Member States of the European Union, including their outermost regions;
+- the Overseas Countries and Territories (OCTs) linked to the Member States; and
+- eligible non-EU countries:
+  - countries associated to Horizon Europe;
+  - legal entities which are established in countries not listed above will be eligible for funding if provided for in the specific call conditions, or if their participation is considered essential forimplementing the action by the granting authority."
 
 ***Type of action***
 [Instruction: If stated in the input text, identify the type of action, e.g. “Research and Innovation Action" or "Action Grant". If the type of action is not mentioned in the input text, then write just "Not stated".]
